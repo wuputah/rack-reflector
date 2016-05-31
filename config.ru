@@ -4,7 +4,7 @@ require 'sinatra'
 
 class RackReflector < Sinatra::Base
 
-  get '/' do
+  get '/*' do
     haml :env
   end
 
