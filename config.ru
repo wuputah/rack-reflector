@@ -1,40 +1,33 @@
-require 'bundler/setup'
-require 'haml'
-require 'sinatra'
+require 'cgi'
 
-class RackReflector < Sinatra::Base
+class RackReflector
 
-  get '/*' do
-    haml :env
-  end
-  post '/*' do
-    haml :env
-  end
-  delete '/*' do
-    haml :env
-  end
-  patch '/*' do
-    haml :env
-  end
-  put '/*' do
-    haml :env
-  end
-  options '/*' do
-    haml :env
-  end
-  link '/*' do
-    haml :env
-  end
-  unlink '/*' do
-    haml :env
+  def initialize
+    @cyclotron = 1
   end
 
-private ######################################################################
+  def call(env)
+    [200, {'Content-type' => 'text/html'}, body(env)]
+  end
+
+private
+
+  def body(env)
+    body = []
+    body << "<table border='1' cellpadding='4' cellspacing='0'>\n"
+    env.each do |k, v|
+      body << "<tr style='background-color: #{cycle("#aaa", "#ccc")}'>"
+      body << "<td>#{k}</td>"
+      body << "<td>#{CGI.escapeHTML(v.to_s)}</td>"
+      body << "</tr>\n"
+    end
+    body << "</table>"
+    body
+  end
 
   def cycle(zero, one)
-    @cyclotron ||= 1
-    @cyclotron   = 1 - @cyclotron
-    @cyclotron  == 0 ? zero : one
+    @cyclotron = 1 - @cyclotron
+    @cyclotron == 0 ? zero : one
   end
 
 end

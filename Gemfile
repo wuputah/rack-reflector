@@ -1,6 +1,3 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
-gem 'sinatra'
-gem 'haml'
-gem 'rake'
-gem 'thin'
+gem 'rack'
