@@ -7,6 +7,27 @@ class RackReflector < Sinatra::Base
   get '/*' do
     haml :env
   end
+  post '/*' do
+    haml :env
+  end
+  delete '/*' do
+    haml :env
+  end
+  patch '/*' do
+    haml :env
+  end
+  put '/*' do
+    haml :env
+  end
+  options '/*' do
+    haml :env
+  end
+  link '/*' do
+    haml :env
+  end
+  unlink '/*' do
+    haml :env
+  end
 
 private ######################################################################
 
